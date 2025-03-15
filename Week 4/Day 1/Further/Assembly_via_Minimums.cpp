@@ -1,4 +1,5 @@
 #include<bits/stdc++.h>
+#define ll long long
 using namespace std;
 
 int main()
@@ -6,25 +7,29 @@ int main()
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
 
-    int n; cin>>n;
-    int k=(n*(n-1))/2;
-    map<int,int>mp;
-    for(int i=0; i<k; i++)
+    int t; cin>>t;
+    while(t--)
     {
-        int x; cin>>x;
-        mp[x]++;
+        ll n; cin>>n;
+        ll k=(n*(n-1))/2;
+        vector<ll>v(k);
+        for(ll i=0; i<k; i++) cin>>v[i];
+
+        sort(v.begin(), v.end());
+
+        vector<int> a(n);
+        int idx = 0;
+
+
+        for (int i = 0; i < n - 1; i++) {
+            a[i] = v[idx];
+            idx += (n - 1 - i);
+        }
+
+        a[n - 1] = v[k - 1];
+        for (int x : a) cout << x << " ";
+        cout << "\n";
     }
-    vector<pair<int,int>>v;
-    for(auto [x,y]: mp)
-    {
-        v.push_back({x,y});
-    }
-    sort(v.begin(), v.end());
-    for(pair x:v)
-    {
-        cout<<x.first<<" "<<x.second<<endl;
-    }
-    
 
     return 0;
 }
